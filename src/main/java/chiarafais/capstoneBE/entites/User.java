@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "utente")
+@Table(name = "utenti")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -38,6 +38,9 @@ public class User  implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
 
     public User(String username, String name, String surname, String email, String password) {
         this.username = username;

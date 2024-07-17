@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
-@Table(name = "spiaggia")
+@Table(name = "spiagge")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -45,6 +47,12 @@ public class Beach {
     @Column(name = "img_spiaggia", nullable = false)
     private String img_beach;
 
+    @Column(name = "posti_occupati", nullable = false)
+    private int reserved_places;
+
+    @OneToMany(mappedBy = "beach")
+    private List<Reservation> reservations;
+
     public Beach(String province, String comune, String name_beach, int max_people, int price_entry, int price_parking, boolean close_number, boolean establishment, String img_beach) {
         this.province = province;
         this.comune = comune;
@@ -55,5 +63,7 @@ public class Beach {
         this.close_number = close_number;
         this.establishment = establishment;
         this.img_beach = img_beach;
+        this.reserved_places = 0;
     }
+
 }
