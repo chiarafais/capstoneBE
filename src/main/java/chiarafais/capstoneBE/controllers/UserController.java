@@ -22,17 +22,19 @@ public class UserController {
     @Autowired
     private UserServices userServices;
 
-//     1. POST http://localhost:3001/users (+ body)
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserRegistrationResponseDTO saveUtente(@RequestBody @Validated UserRequiredDTO body, BindingResult validation){
+////     1. POST http://localhost:3001/users (+ body)
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public UserRegistrationResponseDTO saveUtente(@RequestBody @Validated UserRequiredDTO body, BindingResult validation){
+//
+//        if(validation.hasErrors()) {
+//            System.out.println(validation.getAllErrors());
+//            throw new BadRequestException(validation.getAllErrors());
+//        }
+//        System.out.println(body);
+//        return new UserRegistrationResponseDTO(this.userServices.saveUser(body).getId());
+//    }
 
-        if(validation.hasErrors()) {
-            System.out.println(validation.getAllErrors());
-            throw new BadRequestException(validation.getAllErrors());
-        }
-        System.out.println(body);
-        return new UserRegistrationResponseDTO(this.userServices.saveUser(body).getId());}
 
     //     2. GET http://localhost:3001/users/me
     @GetMapping("/me")
