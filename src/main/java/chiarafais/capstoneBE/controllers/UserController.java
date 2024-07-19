@@ -2,7 +2,6 @@ package chiarafais.capstoneBE.controllers;
 
 import chiarafais.capstoneBE.entites.User;
 import chiarafais.capstoneBE.exceptions.BadRequestException;
-import chiarafais.capstoneBE.payloads.User.UserRegistrationResponseDTO;
 import chiarafais.capstoneBE.payloads.User.UserRequiredDTO;
 import chiarafais.capstoneBE.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;

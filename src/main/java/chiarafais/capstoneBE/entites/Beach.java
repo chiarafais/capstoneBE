@@ -1,19 +1,14 @@
 package chiarafais.capstoneBE.entites;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "spiagge")
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Beach {
     @Id
     @GeneratedValue  //  (strategy = GenerationType.IDENTITY)

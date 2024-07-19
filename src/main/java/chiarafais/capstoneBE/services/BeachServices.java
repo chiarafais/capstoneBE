@@ -48,4 +48,8 @@ public class BeachServices {
         Beach foundBeach = findById(id_spiaggia);
         beachRepository.delete(foundBeach);
     }
+
+    public Beach save(Beach beach) {
+        return beachRepository.save(beach);
+    }
 }

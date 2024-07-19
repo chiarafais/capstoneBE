@@ -12,9 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "utenti")
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +39,7 @@ public class User  implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
+
 
     public User(String username, String name, String surname, String email, String password) {
         this.username = username;
