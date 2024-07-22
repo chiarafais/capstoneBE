@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/reservation")
@@ -16,15 +17,15 @@ public class ReservationController {
     @Autowired
     private ReservationServices reservationServices;
 
-    // 1. POST http://localhost:3001/reservation?userId=&beachId=&date=
+    // 1. POST http://localhost:3001/reservation?userId=&beachId=&date=&peopleNum=
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation createReservation(@RequestParam Long userId,@RequestParam Long beachId,@RequestParam String date){
+    public Reservation createReservation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,@RequestParam Long userId,@RequestParam Long beachId,@RequestParam String date, @RequestParam int peopleNum){
         LocalDate reservationDate = LocalDate.parse(date);
-        return reservationServices.saveNewReservation(userId,beachId,reservationDate);
+        return reservationServices.saveNewReservation(userId,beachId,reservationDate,peopleNum);
     }
 
-//    // 2. GET http://localhost:3001/reservation
+    // 2. GET http://localhost:3001/reservation
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Reservation> findAllReservation(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){

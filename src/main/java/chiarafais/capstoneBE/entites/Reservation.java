@@ -2,7 +2,9 @@ package chiarafais.capstoneBE.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "prenotazioni")
@@ -23,11 +25,14 @@ public class Reservation {
     private User user;
 
 
-    private LocalDate date;
+    private LocalDate dateStart;
 
-    public Reservation(Beach beach, User user, LocalDate date) {
+    private LocalDate dateEnd;
+
+    public Reservation(Beach beach, User user, LocalDate dateStart) {
         this.beach = beach;
         this.user = user;
-        this.date = date;
+        this.dateStart = dateStart;
+        this.dateEnd= dateStart.plusDays(1);
     }
 }

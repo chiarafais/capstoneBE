@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class BeachServices {
 
@@ -52,4 +54,5 @@ public class BeachServices {
     public Beach save(Beach beach) {
         return beachRepository.save(beach);
     }
+
 }

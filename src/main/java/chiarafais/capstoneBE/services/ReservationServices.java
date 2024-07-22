@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +30,8 @@ public class ReservationServices {
     @Autowired
     private BeachServices beachServices;
 
-    public Reservation saveNewReservation(long userId, long beachId, LocalDate date){
+    public Reservation saveNewReservation(long userId, long beachId, LocalDate date, int peopleNum){
+
         User user = userServices.findById(userId);
         Beach beach = beachServices.findById(beachId);
 
@@ -36,12 +39,13 @@ public class ReservationServices {
             throw new BadRequestException("Spiaggia piena, non è possibile prenotare, riprova più tardi!");
         }
 
-         Optional<Reservation> reservationExist = reservationRepository.findByUserAndBeachAndDate(user, beach, date);
+         Optional<Reservation> reservationExist = reservationRepository.findByUserAndBeachAndDateStart(user, beach, date);
         if (reservationExist.isPresent()){
             throw new BadRequestException("Hai già una prenotazione per questa data");
         }
 
-        beach.setReserved_places(beach.getReserved_places() + 1);
+
+        beach.setReserved_places(beach.getReserved_places() + peopleNum);
         beachServices.save(beach);
 
         Reservation reservation = new Reservation(beach,user,date);
@@ -59,11 +63,6 @@ public class ReservationServices {
         Reservation foundReservation = findById(idPrenotazione);
         reservationRepository.delete(foundReservation);
     }
-
-//    public Reservation updateReservation(long idPrenotazione, ReservationDTO body) {
-//        Reservation foundReservation = findById(idPrenotazione);
-//        return reservationRepository.save(foundReservation);
-//    }
 
 
 }

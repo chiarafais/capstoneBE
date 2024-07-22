@@ -1,5 +1,6 @@
 package chiarafais.capstoneBE.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,7 @@ public class Beach {
     private int reserved_places;
 
     @OneToMany(mappedBy = "beach")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     public Beach(String province, String comune, String name_beach, int max_people, int price_entry, int price_parking, boolean close_number, boolean establishment, String img_beach) {

@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation ,Long> {
 
-    Optional<Reservation> findByUserAndBeachAndDate(User user, Beach beach, LocalDate date);
+    Optional<Reservation> findByUserAndBeachAndDateStart(User user, Beach beach, LocalDate dateStart);
+
 }
