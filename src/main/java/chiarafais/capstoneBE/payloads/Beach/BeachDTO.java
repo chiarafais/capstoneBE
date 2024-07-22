@@ -22,8 +22,7 @@ public record BeachDTO (
         int price_parking,
         boolean close_number,
         boolean establishment,
-        @NotEmpty(message = "Obbligatorio inserire il nome della spiaggia")
-        @Size(min = 3, max= 150, message = "Il nome della spiaggia deve essere compresa tra i 3 e i 30 caratteri")
+        @NotEmpty(message = "Obbligatorio inserire img spiaggia")
         String img_beach
 ){
 }
