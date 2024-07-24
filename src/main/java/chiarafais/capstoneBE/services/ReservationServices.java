@@ -5,7 +5,7 @@ import chiarafais.capstoneBE.entites.Reservation;
 import chiarafais.capstoneBE.entites.User;
 import chiarafais.capstoneBE.exceptions.BadRequestException;
 import chiarafais.capstoneBE.exceptions.NotFoundException;
-import chiarafais.capstoneBE.payloads.Reservation.ReservationDTO;
+import chiarafais.capstoneBE.repositories.BeachRepository;
 import chiarafais.capstoneBE.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +29,10 @@ public class ReservationServices {
     @Autowired
     private BeachServices beachServices;
 
-    public Reservation saveNewReservation(long userId, long beachId, LocalDate date, int peopleNum){
+    @Autowired
+    private BeachRepository beachRepository;
+
+    public Reservation saveNewReservation(long userId, long beachId, LocalDate date, int peopleNumber){
 
         User user = userServices.findById(userId);
         Beach beach = beachServices.findById(beachId);
@@ -44,12 +46,20 @@ public class ReservationServices {
             throw new BadRequestException("Hai già una prenotazione per questa data");
         }
 
+        Reservation reservation = new Reservation(beach,user,date,peopleNumber);
+        reservationRepository.save(reservation);
 
-        beach.setReserved_places(beach.getReserved_places() + peopleNum);
+        List<Reservation> reservations_list = this.reservationRepository.number_reservation(beach.getId());
+        System.out.println(reservations_list);
+        Long total_people = reservations_list.stream().mapToLong(Reservation::getPeopleNumber).sum();
+
+//        beach.setReserved_places(beach.getReserved_places() + peopleNum);
+        beach.setReserved_places(total_people.intValue());
+
         beachServices.save(beach);
 
-        Reservation reservation = new Reservation(beach,user,date);
-        return reservationRepository.save(reservation);
+        return reservation;
+
     }
     public Page<Reservation> findAll(int pageNumber, int pageSize){
         Pageable reservations = PageRequest.of(pageNumber, pageSize);
@@ -64,5 +74,15 @@ public class ReservationServices {
         reservationRepository.delete(foundReservation);
     }
 
+    public void refreshPeopleNum(){
+       List<Beach> prova = this.beachRepository.findAll();
+
+        for (Beach element:prova) {
+        int peopleNum = this.reservationRepository.number_reservation(element.getId()).stream().mapToInt(Reservation::getPeopleNumber).sum();
+        element.setReserved_places(peopleNum);
+        beachRepository.save(element);
+        }
+
+    }
 
 }

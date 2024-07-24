@@ -10,7 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BeachServices {
@@ -53,6 +55,24 @@ public class BeachServices {
 
     public Beach save(Beach beach) {
         return beachRepository.save(beach);
+    }
+
+    public List<Beach> establishmentTrue(){
+        return beachRepository.beachEstablishment();
+    }
+
+    public List<Beach> available(){
+        return beachRepository.beachAvailable();
+    }
+
+    public List<Beach> filterProvince(String provinces){
+        return beachRepository.filterProvince(provinces);
+    }
+
+    public List<String> findProvince(){
+        List<String> prov = beachRepository.allProvince();
+        Set<String> uniqueProv = prov.stream().collect(Collectors.toSet());
+        return uniqueProv.stream().collect(Collectors.toList());
     }
 
 }

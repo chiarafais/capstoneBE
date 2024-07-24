@@ -45,4 +45,12 @@ public class ReservationController {
     public void deleteReservation(@PathVariable long id_prenotazione){
         reservationServices.deleteReservation(id_prenotazione);
     }
+
+    // 5. GET http://localhost:3001/reservation/update
+    @GetMapping("/prova")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+    public void refreshPeolpe(){
+        reservationServices.refreshPeopleNum();
+    }
+
 }

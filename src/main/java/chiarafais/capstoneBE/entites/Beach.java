@@ -50,6 +50,7 @@ public class Beach {
     @JsonIgnore
     private List<Reservation> reservations;
 
+
     public Beach(String province, String comune, String name_beach, int max_people, int price_entry, int price_parking, boolean close_number, boolean establishment, String img_beach) {
         this.province = province;
         this.comune = comune;

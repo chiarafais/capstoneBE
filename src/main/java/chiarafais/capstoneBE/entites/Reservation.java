@@ -1,13 +1,15 @@
 package chiarafais.capstoneBE.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "prenotazioni")
+@JsonIgnoreProperties({"beach"})
 @NoArgsConstructor
 @Data
 public class Reservation {
@@ -29,10 +31,24 @@ public class Reservation {
 
     private LocalDate dateEnd;
 
-    public Reservation(Beach beach, User user, LocalDate dateStart) {
+    private int peopleNumber;
+
+
+    public Reservation(Beach beach, User user, LocalDate dateStart, int peopleNumber) {
         this.beach = beach;
         this.user = user;
         this.dateStart = dateStart;
         this.dateEnd= dateStart.plusDays(1);
+        this.peopleNumber= peopleNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", dateStart=" + dateStart +
+                ", dateEnd=" + dateEnd +
+                ", peopleNumber=" + peopleNumber +
+                '}';
     }
 }

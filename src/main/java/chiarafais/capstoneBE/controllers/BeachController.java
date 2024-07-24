@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/beach")
@@ -59,7 +61,29 @@ public class BeachController {
       beachServices.deleteBeach(id_spiaggia);
     }
 
+    // 6. GET http://localhost:3001/beach/establishment
+    @GetMapping("/establishment")
+    public List<Beach> establishment(){
+        return beachServices.establishmentTrue();
+    }
 
+    // 7. GET http://localhost:3001/beach/available
+    @GetMapping("/available")
+    public List<Beach> available(){
+        return beachServices.available();
+    }
+
+    // 8. GET http://localhost:3001/beach/province{nome provincia}
+    @GetMapping("/province/{provinces}")
+    public List<Beach> province(@PathVariable String provinces){
+        return beachServices.filterProvince(provinces);
+    }
+
+    // 9. GET http://localhost:3001/beach/province
+    @GetMapping("/province")
+    public List<String> province(){
+        return beachServices.findProvince();
+    }
 
 
 }
