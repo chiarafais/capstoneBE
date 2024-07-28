@@ -3,6 +3,7 @@ package chiarafais.capstoneBE.controllers;
 import chiarafais.capstoneBE.entites.User;
 import chiarafais.capstoneBE.exceptions.BadRequestException;
 import chiarafais.capstoneBE.payloads.User.UserRequiredDTO;
+import chiarafais.capstoneBE.payloads.User.UserUpdateDTO;
 import chiarafais.capstoneBE.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +44,7 @@ public class UserController {
 
     //     3. PUT http://localhost:3001/users/me
     @PutMapping("/me")
-    public User updateMyProfile(@AuthenticationPrincipal User currentUser, @RequestBody @Validated UserRequiredDTO body, BindingResult bindingResult) {
+    public User updateMyProfile(@AuthenticationPrincipal User currentUser, @RequestBody @Validated UserUpdateDTO body, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BadRequestException(bindingResult.getAllErrors());
         }
@@ -65,15 +66,15 @@ public class UserController {
     }
 
 
-    //     6. PUT http://localhost:3001/users/{userId}
-    @PutMapping("/{userId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public User findByIdAndUpdate(@PathVariable long userId, @RequestBody @Validated UserRequiredDTO body, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestException(bindingResult.getAllErrors());
-        }
-        return this.userServices.findByIdAndUpdate(userId, body);
-    }
+//    //     6. PUT http://localhost:3001/users/{userId}
+//    @PutMapping("/{userId}")
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    public User findByIdAndUpdate(@PathVariable long userId, @RequestBody @Validated UserRequiredDTO body, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            throw new BadRequestException(bindingResult.getAllErrors());
+//        }
+//        return this.userServices.findByIdAndUpdate(userId, body);
+//    }
 
     //     7. DELETE http://localhost:3001/users/{userId}
     @DeleteMapping("/{userId}")

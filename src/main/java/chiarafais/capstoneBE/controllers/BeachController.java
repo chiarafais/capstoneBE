@@ -30,8 +30,8 @@ public class BeachController {
        return beachServices.saveNewBeach(body);
     }
 
-    // 2.GET http://localhost:3001/beach ritorna la lista delle spiagge
-    @GetMapping
+    // 2.GET http://localhost:3001/beach/allbeach ritorna la lista delle spiagge
+    @GetMapping("/allbeach")
     public Page<Beach> findAllBeach(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
         return beachServices.findAll(page,size);
     }

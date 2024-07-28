@@ -4,6 +4,7 @@ import chiarafais.capstoneBE.entites.User;
 import chiarafais.capstoneBE.exceptions.BadRequestException;
 import chiarafais.capstoneBE.exceptions.NotFoundException;
 import chiarafais.capstoneBE.payloads.User.UserRequiredDTO;
+import chiarafais.capstoneBE.payloads.User.UserUpdateDTO;
 import chiarafais.capstoneBE.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +60,11 @@ public class UserServices {
         }
     }
 
-    public User findByIdAndUpdate(long userId, UserRequiredDTO body) {
+    public User findByIdAndUpdate(long userId, UserUpdateDTO body) {
         User found = findById(userId);
-        found.setEmail(body.email());
         found.setUsername(body.username());
         found.setName(body.name());
         found.setSurname(body.surname());
-        found.setPassword(passwordEncoder.encode(body.password()));
         return userRepository.save(found);
     }
 
