@@ -1,14 +1,17 @@
 package chiarafais.capstoneBE.controllers;
 
 import chiarafais.capstoneBE.entites.Reservation;
+import chiarafais.capstoneBE.entites.User;
 import chiarafais.capstoneBE.services.ReservationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservation")
@@ -51,6 +54,12 @@ public class ReservationController {
 //    @PreAuthorize("hasAuthority('ADMIN')")
     public void refreshPeolpe(){
         reservationServices.refreshPeopleNum();
+    }
+
+    // 6. GET http://localhost:3001/reservation/user
+    @GetMapping("/user")
+    public List<Reservation> reservationForUser(@AuthenticationPrincipal User user){
+        return reservationServices.userReservation(user.getId());
     }
 
 }

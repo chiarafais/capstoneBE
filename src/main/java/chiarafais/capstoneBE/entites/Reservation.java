@@ -1,6 +1,5 @@
 package chiarafais.capstoneBE.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "prenotazioni")
-@JsonIgnoreProperties({"beach"})
+//@JsonIgnoreProperties({"beach"})
 @NoArgsConstructor
 @Data
 public class Reservation {

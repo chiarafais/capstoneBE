@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface BeachRepository extends JpaRepository<Beach, Long> {
 
+
+
     //query stabilimento = true
     @Query("SELECT s FROM Beach s WHERE s.establishment = true")
     List<Beach> beachEstablishment();

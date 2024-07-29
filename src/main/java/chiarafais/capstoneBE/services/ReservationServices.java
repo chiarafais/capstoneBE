@@ -85,4 +85,8 @@ public class ReservationServices {
 
     }
 
+    public List<Reservation> userReservation(long userId){
+        return reservationRepository.reservations_user(userId);
+    }
+
 }
