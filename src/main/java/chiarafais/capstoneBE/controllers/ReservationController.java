@@ -43,7 +43,6 @@ public class ReservationController {
 
     // 4. DELETE http://localhost:3001/reservation/{id_spiaggia} elimina la specifica reservation
     @DeleteMapping("/{id_prenotazione}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteReservation(@PathVariable long id_prenotazione){
         reservationServices.deleteReservation(id_prenotazione);
