@@ -19,6 +19,6 @@ public interface ReservationRepository extends JpaRepository<Reservation ,Long> 
     @Query("SELECT r FROM Reservation r WHERE r.dateStart = CURRENT_DATE AND r.beach.id = :beachId")
     List<Reservation> number_reservation(@Param("beachId")Long beachId);
 
-    @Query("SELECT p FROM Reservation p WHERE p.user.id = :userId")
+    @Query("SELECT p FROM Reservation p WHERE p.user.id = :userId AND p.dateStart >= CURRENT_DATE")
     List<Reservation> reservations_user(@Param("userId")Long userId);
 }
