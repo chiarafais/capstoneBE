@@ -46,12 +46,18 @@ public class Beach {
     @Column(name = "posti_occupati", nullable = false)
     private int reserved_places;
 
+    @Column(name = "link_mappe", nullable = false)
+    private String link_mappe;
+
+    @Column(name = "geo_card", nullable = false, length=400)
+    private String geo_card;
+
     @OneToMany(mappedBy = "beach")
     @JsonIgnore
     private List<Reservation> reservations;
 
 
-    public Beach(String province, String comune, String name_beach, int max_people, int price_entry, int price_parking, boolean close_number, boolean establishment, String img_beach) {
+    public Beach(String province, String comune, String name_beach, int max_people, int price_entry, int price_parking, boolean close_number, boolean establishment, String img_beach,String link_mappe,String geo_card) {
         this.province = province;
         this.comune = comune;
         this.name_beach = name_beach;
@@ -62,6 +68,8 @@ public class Beach {
         this.establishment = establishment;
         this.img_beach = img_beach;
         this.reserved_places = 0;
+        this.link_mappe = link_mappe;
+        this.geo_card = geo_card;
     }
 
 }

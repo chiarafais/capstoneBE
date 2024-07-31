@@ -21,7 +21,7 @@ public class BeachServices {
     private BeachRepository beachRepository;
 
     public Beach saveNewBeach(BeachDTO beachDTO){
-        Beach spiaggia = new Beach(beachDTO.province(), beachDTO.comune(), beachDTO.name_beach(), beachDTO.max_people(), beachDTO.price_entry(), beachDTO.price_parking(), beachDTO.close_number(), beachDTO.establishment(), beachDTO.img_beach());
+        Beach spiaggia = new Beach(beachDTO.province(), beachDTO.comune(), beachDTO.name_beach(), beachDTO.max_people(), beachDTO.price_entry(), beachDTO.price_parking(), beachDTO.close_number(), beachDTO.establishment(), beachDTO.img_beach(), beachDTO.link_maps(), beachDTO.geo_card());
         return beachRepository.save(spiaggia);
     }
 
@@ -45,6 +45,8 @@ public class BeachServices {
         foundBeach.setClose_number(body.close_number());
         foundBeach.setEstablishment(body.establishment());
         foundBeach.setImg_beach(body.img_beach());
+        foundBeach.setLink_mappe(body.link_maps());
+        foundBeach.setGeo_card(body.geo_card());
         return beachRepository.save(foundBeach);
     }
 

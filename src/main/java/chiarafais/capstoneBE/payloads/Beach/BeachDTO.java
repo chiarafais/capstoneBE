@@ -23,6 +23,8 @@ public record BeachDTO (
         boolean close_number,
         boolean establishment,
         @NotEmpty(message = "Obbligatorio inserire img spiaggia")
-        String img_beach
+        String img_beach,
+        String link_maps,
+        String geo_card
 ){
 }
